@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block body_block %}
+<h1 class="text-center">Welcome to Ayomi Test app </h1>
+
+ {% if user.is_authenticated %}
+     <div class="text-center">
+       <h2>Hello {{ user.username }}</h2>
+       <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <h2 class="text-center"><a class="navbar-link" href="{% url 'signup' %}">Register</a> or <a class="navbar-link" href="{% url 'login' %}">Login</a> </h2>
+          {% endif %}
+     </div>
+
+
+
+{% endblock %}

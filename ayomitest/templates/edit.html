@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block body_block %}
+<div class="container">
+     {% if messages %}
+     {% for msg in messages %}
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      {{msg.message}}
+    </div>
+    {% endfor %}
+   {% endif %}
+    </div>
+
+ <a class="navbar-link btn btn-default" href="{% url 'profiles' %}"> Go to profiles</a>
+  <div class="container">
+      <h2 class="text-danger text-center">Modify Your Details here</h2>
+      <div class="col-md-6"></div>
+	  <table class="table table-bordered ">
+    <thead>
+      <tr>
+        <th>Id</th>
+          <th>Name</th>
+        <th>FirstName</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="success" >
+        <td>{{user.id}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.first_name}}</td>
+        <td id="updated-email">{{user.email}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+     <form id="updateForm" enctype="multipart/form-data"  method="POST">
+          {% csrf_token %}
+         <table class="active">
+
+             {{form.as_table}}
+
+          </table>
+          <div class="form-group m-5">
+          <input  id="submitBtn" type="submit" class="btn btn-warning"  value="Update">
+          </div>
+        </form>
+    </div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+   const frm = $('#updateForm');
+   frm.submit(function (e) {
+      e.preventDefault();
+
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('data-url'),
+            data: frm.serialize(),
+            success: function (data) {
+                var str = $( "#id_email" ).val();
+                $("#updated-email").html(str);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+    });
+
+
+</script>
+
+{% endblock %}

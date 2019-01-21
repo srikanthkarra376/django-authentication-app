@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block body_block %}
+<style>
+.errorlist {
+color:red;
+}
+</style>
+  <div class="container">
+      <h2>Register Here</h2>
+    <div class="jumbotron">
+      {% if registered %}
+        <h1>Thank you for registering!</h1>
+      {% else %}
+     <form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+         <table class="table">
+         {{form.as_table}}
+          </table>
+         <div class=" col-md-4 text-right">
+           <input type="submit" class="btn btn-primary btn-block"  value="Register">
+         </div>
+
+        </form>
+
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
