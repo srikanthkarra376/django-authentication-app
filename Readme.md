@@ -1,1 +1,1 @@
-added read me
+The Authentication application built by using Python,Django Framework And Bootrsap ,Initially User Need to register to see his profile details ,Once user logged in , Able to  edit and update email with refreshing the page 
